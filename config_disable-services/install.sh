@@ -6,8 +6,8 @@
 # Check root
 [ "$(id -u)" -ne 0 ] && { echo "Must run as root" 1>&2; exit 1; }
 
-#systemctl stop NetworkManager-wait-online.service
-#systemctl mask NetworkManager-wait-online.service
+systemctl stop NetworkManager-wait-online.service
+systemctl mask NetworkManager-wait-online.service
 
 #systemctl stop wpa_supplicant
 #systemctl disable wpa_supplicant	# No mask, may be needed by network manager
