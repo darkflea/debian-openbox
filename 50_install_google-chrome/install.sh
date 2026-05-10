@@ -9,10 +9,10 @@
 
 # Note: On Arch, Google Chrome is in the AUR. 
 # This script assumes an AUR helper like 'yay' or manual build is used.
-if ! command -v google-chrome-stable &> /dev/null; then
+if ! command -v google-chrome &> /dev/null; then
     echo -e "\e[1mGoogle Chrome not found. Please install 'google-chrome' from the AUR.\e[0m"
 fi
 
 # Set as default
 echo -e "\e[1mSetting as default alternative...\e[0m"
-command -v google-chrome-stable &>/dev/null && ln -sf /usr/bin/google-chrome-stable /usr/bin/x-www-browser
+command -v google-chrome &>/dev/null && ln -sf /usr/bin/google-chrome /usr/bin/x-www-browser

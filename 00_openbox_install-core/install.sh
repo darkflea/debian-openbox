@@ -11,7 +11,7 @@ base_dir="$(dirname "$(readlink -f "$0")")"
 
 # Install packages
 echo -e "\n\e[1mInstalling packages...\e[0m"
-pacman -S --noconfirm xorg-server xorg-xinit xorg-utils xorg-server-utils xorg-xkbutils xterm dbus polkit
+pacman -S --noconfirm xorg-server xorg-xinit xorg-utils xorg-server-utils xorg-xkbutils xterm dbus polkit polkit-gnome
 pacman -S --noconfirm xdg-utils xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gtk shared-mime-info desktop-file-utils
 pacman -S --noconfirm openbox obconf lxappearance picom xfce4-clipman-plugin xfce4-power-manager upower arandr gsimplecal xcape file-roller xautomation yad inxi
 pacman -S --noconfirm libcanberra adwaita-icon-theme gsettings-desktop-schemas

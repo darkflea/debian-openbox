@@ -58,7 +58,7 @@ function interactive_upgrade() {
 	read -p "Press enter to continue upgrade..."
 	echo
 	
-	[ "$(id -u)" -eq 0 ] && aptitude full-upgrade || sudo aptitude full-upgrade
+	[ "$(id -u)" -eq 0 ] && pacman -Syu || sudo pacman -Syu
 	if ! [ $? -eq 0 ]; then 
 		read; 
 		exit 1; 
@@ -90,7 +90,7 @@ function tint2_executor_msg {
 #===============================================================================
 function install {
 	[ "$(id -u)" -ne 0 ] && { echo "Must run as root" 1>&2; exit 1; }
-	which aptitude &>/dev/null || apt-get install -y aptitude
+	pacman -S --noconfirm pacman-contrib
 	
 	echo "Copying $(basename $0) to $install_file"
 	[ "$install_file" = "$(readlink -f $0)" ] || cp "$0" "$install_file" 
@@ -104,7 +104,7 @@ function install {
 Manual config needed for tint2:
 execp = new
 execp_command = '"$(basename $install_file)"' -m
-execp_lclick_command = x-terminal-emulator -b -e '"$(basename $install_file)"' -i
+execp_lclick_command = terminator -e '"$(basename $install_file)"' -i
 execp_tooltip = Pending updates...
 execp_interval = 0
 execp_background_id = 4

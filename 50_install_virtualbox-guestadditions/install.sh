@@ -9,12 +9,6 @@ if [ "$(systemd-detect-virt)" != "oracle" ]; then
   exit 1
 fi
 
-vb_version=$(wget -qO- https://download.virtualbox.org/virtualbox/LATEST.TXT)
-echo -e "\e[1mVirtualBox guest detected. Installing Guest Additions ${vb_version} ...\e[0m"
-pacman -S --noconfirm base-devel dkms linux-headers wget p7zip
-t=$(mktemp -d)
-ga_url="https://download.virtualbox.org/virtualbox/${vb_version}/VBoxGuestAdditions_${vb_version}.iso"
-wget -P "$t" "$ga_url"
-7z x "$t"/* -o"$t" &>/dev/null
-bash "$t/VBoxLinuxAdditions.run"
-rm -rf "$t"
+echo -e "\e[1mVirtualBox guest detected. Installing Guest Additions...\e[0m"
+pacman -S --noconfirm virtualbox-guest-utils
+systemctl enable --now vboxservice.service
