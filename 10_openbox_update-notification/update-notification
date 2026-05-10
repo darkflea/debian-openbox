@@ -24,19 +24,15 @@ cron_when="daily"								# weekly | monthly | daily | hourly
 # DESCRIPTION: make apt update and and check new packages updates and save the list in $updates_file
 #===============================================================================
 function update () {
-	# If no update today exec update
-	if ! [ "$(find /var/cache/apt/pkgcache.bin -mtime 0 2>/dev/null)" ]; then
-		# CHECK INTERNET CONNECTION
-		echo "Checking Internet connection..."
-		ping -c 1 8.8.8.8 &>/dev/null || exit 1
+	# CHECK INTERNET CONNECTION
+	echo "Checking Internet connection..."
+	ping -c 1 8.8.8.8 &>/dev/null || exit 1
 
-		# REPOSITORY UPDATE-NOTIFICATION
-		echo "Updating package repositoriy..."
-		aptitude update &> /dev/null
-	fi
-	
+	# On Arch, we use checkupdates from pacman-contrib
+	echo "Checking for Arch updates..."
+	checkupdates > "$updates_file" 2>/dev/null
+
 	echo "Checking updates and saving in $updates_file..."
-	aptitude search '~U !~ahold' > "$updates_file" 
 	echo 
 
 	# No updates

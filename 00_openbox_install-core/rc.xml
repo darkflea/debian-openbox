@@ -331,7 +331,7 @@
           <enabled>false</enabled>
           <name>Terminal</name>
         </startupnotify>
-        <command>x-terminal-emulator</command>
+        <command>terminator</command>
       </action>
     </keybind>
     <keybind key="W-w">
@@ -340,7 +340,7 @@
           <enabled>true</enabled>
           <name>Web Browser</name>
         </startupnotify>
-        <command>x-www-browser</command>
+        <command>google-chrome-stable</command>
       </action>
     </keybind>
     <keybind key="W-l">

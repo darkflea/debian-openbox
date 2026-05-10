@@ -20,4 +20,4 @@ cat "$base_dir/grub.conf" >> /etc/default/grub
 
 # Update grub
 echo -e "\e[1mUpdating GRUB..\e[0m"
-update-grub
+grub-mkconfig -o /boot/grub/grub.cfg

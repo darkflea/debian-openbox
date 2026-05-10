@@ -18,8 +18,7 @@ systemctl set-default multi-user.target
 
 # Install physlock
 echo -e "\e[1mInstalling locker packages...\e[0m"
-[ "$(find /var/cache/apt/pkgcache.bin -mtime 0 2>/dev/null)" ] || apt-get update  
-apt-get -y install physlock 
+pacman -S --noconfirm physlock
 	
 # Config physlock for start after suspend
 cp "$base_dir"/physlock.service /etc/systemd/system/
@@ -27,7 +26,7 @@ systemctl enable physlock.service
 
 # Add physlock as x-locker alternative
 echo -e "\e[1mSetting as default alternative...\e[0m"
-update-alternatives --install /usr/bin/x-locker x-locker $(which physlock) 90
+ln -sf $(which physlock) /usr/bin/x-locker
 	
 # Config tty1 to autoexec startx
 echo -e "\e[1mSetting tty1 to autostart X...\e[0m"
@@ -45,5 +44,3 @@ chmod -v a+x /usr/bin/loginfetch
 [ ! -d "/etc/systemd/system/getty@.service.d/" ] && mkdir -vp "/etc/systemd/system/getty@.service.d/"
 echo '[Service]
 ExecStartPre=-/bin/bash -c "/usr/bin/loginfetch"' | tee "/etc/systemd/system/getty@.service.d/override.conf"
-
-
